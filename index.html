@@ -63,6 +63,21 @@
 
     var tweetServer = "http://tweet.beawork.com:5000/tweets";
 
+
+    var time = new Date().getTime();
+     $(document.body).bind("mousemove keypress", function(e) {
+         time = new Date().getTime();
+     });
+
+     function refresh() {
+         if(new Date().getTime() - time >= 3*60000) 
+             window.location.reload(true);
+         else 
+             setTimeout(refresh, 3*10000);
+     }
+
+    setTimeout(refresh, 3*10000);
+
     function initMap() {
 
         var myLatLng = {lat: 33.697998, lng: -117.846868};
