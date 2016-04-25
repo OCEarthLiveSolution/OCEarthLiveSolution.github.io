@@ -61,7 +61,8 @@
 
     var server = "http://eonet.sci.gsfc.nasa.gov/api/v2.1";
 
-    var tweetServer = "http://tweet.beawork.com:5000/tweets";
+    //var tweetServer = "http://tweet.beawork.com:5000/tweets";
+    var tweetServer = "http://brats.com:5000/tweets";
 
 
     var time = new Date().getTime();
@@ -191,7 +192,7 @@
         }
 
 
-        function addInfoBox(id, title, category, tweet, image, event, tempEvent) {
+        function addInfoBox(id, title, category, tweet, image, event, tempEvent, timestamp) {
 
             var contentString = "";
 
@@ -279,7 +280,7 @@
                         });
 
                         google.maps.event.addListener(marker, 'click', function (event) {
-                            addInfoBox(myId, undefined, undefined, tweet, image, event, null);
+                            addInfoBox(myId, undefined, undefined, tweet, image, event, undefined, undefined);
                         });
 
 
@@ -316,6 +317,9 @@
                                             myPoint.lat = parseFloat(event.geometries[i].coordinates[1]);
                                             myPoint.lng = parseFloat(event.geometries[i].coordinates[0]);
 
+                                            var timestamp = event.geometries[i].date;
+
+
                                             //console.log(JSON.stringify(event.categories[0].title));
                                             var pinIcon;
                                             if (i == numPoints - 1) {
@@ -332,7 +336,7 @@
                                                 icon: pinIcon
                                             });
                                             google.maps.event.addListener(marker, 'click', function (event) {
-                                                addInfoBox(myId, myTitle, myCategory, undefined, undefined, event, tempEvent);
+                                                addInfoBox(myId, myTitle, myCategory, undefined, undefined, event, tempEvent, timestamp);
                                             });
 
                                             marker.setMap(map);
